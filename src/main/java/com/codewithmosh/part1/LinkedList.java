@@ -116,6 +116,21 @@ public class LinkedList {
         return array;
     }
 
+    public void reverse() {
+        if (isEmpty()) return;
+        var previous = first;
+        var current = first.next;
+        while (current != null) {
+            var next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        last = first;
+        last.next = null;
+        first = previous;
+    }
+
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         System.out.println(list.size());
@@ -131,5 +146,8 @@ public class LinkedList {
         System.out.println(list.size());
         var array = list.toArray();
         System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(list.toArray()));
+        list.reverse();
+        System.out.println(Arrays.toString(list.toArray()));
     }
 }
