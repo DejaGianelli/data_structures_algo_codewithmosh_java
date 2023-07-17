@@ -131,6 +131,24 @@ public class LinkedList {
         first = previous;
     }
 
+    public int getKthFromTheEnd(int k) {
+        if (k > size || k == 0)
+            throw new IllegalArgumentException();
+
+        if (isEmpty())
+            throw new IllegalStateException();
+
+        var tailIndex = k - 1;
+        var kthNode = first;
+        while (kthNode != null) {
+            if (tailIndex == (size - 1))
+                break;
+            tailIndex++;
+            kthNode = kthNode.next;
+        }
+        return kthNode.value;
+    }
+
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         System.out.println(list.size());
@@ -149,5 +167,6 @@ public class LinkedList {
         System.out.println(Arrays.toString(list.toArray()));
         list.reverse();
         System.out.println(Arrays.toString(list.toArray()));
+        System.out.println(list.getKthFromTheEnd(2));
     }
 }
