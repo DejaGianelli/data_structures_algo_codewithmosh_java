@@ -1,9 +1,24 @@
 package com.codewithmosh.part1;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class CharFinder {
+    public Character findFirstRepeatadCharacter(String str) {
+        Set<Character> set = new HashSet<>();
+        char[] chars = str.toCharArray();
+        for (char ch : chars) {
+            if (set.contains(ch)) {
+                return ch;
+            }
+            set.add(ch);
+        }
+
+        return Character.MIN_VALUE;
+    }
+
     public Character findFirstNonRepeatadCharacter(String str) {
         Map<Character, Integer> map = new HashMap<>();
 
@@ -30,6 +45,10 @@ public class CharFinder {
         var str = "a green apple";
         var finder = new CharFinder();
         var ch = finder.findFirstNonRepeatadCharacter(str);
+        System.out.println(ch);
+
+        str = "green apple";
+        ch = finder.findFirstRepeatadCharacter(str);
         System.out.println(ch);
     }
 }
