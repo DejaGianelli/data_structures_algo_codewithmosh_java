@@ -13,6 +13,19 @@ public class Tree {
 
     private Node root;
 
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node root) {
+        if (root == null)
+            return -1;
+        if (root.leftChild == null && root.rightChild == null)
+            return 0;
+        return 1 + Math.max(height(root.leftChild),
+                height(root.leftChild));
+    }
+
     public void traverseInOrder() {
         traverseInOrder(root);
     }
@@ -106,6 +119,8 @@ public class Tree {
         tree.traverseInOrder();
         tree.traversePostOrder();
 
+        System.out.println(tree.height());
+        
         System.out.println("Finished");
     }
 }
