@@ -20,7 +20,7 @@ public class Tree {
     private int height(Node root) {
         if (root == null)
             return -1;
-        if (root.leftChild == null && root.rightChild == null)
+        if (isLeaf(root))
             return 0;
         return 1 + Math.max(height(root.leftChild),
                 height(root.leftChild));
@@ -100,6 +100,32 @@ public class Tree {
         }
     }
 
+    public boolean isLeaf(Node root) {
+        return root.leftChild == null && root.rightChild == null;
+    }
+
+    // O(log n)
+    public int min() {
+        if (root == null)
+            throw new IllegalStateException();
+        Node current = root;
+        Node last = current;
+        while (current != null) {
+            last = current;
+            current = current.leftChild;
+        }
+        return last.value;
+    }
+
+    // O(n)
+    public int min(Node root) {
+        if (isLeaf(root))
+            return root.value;
+        int left = min(root.leftChild);
+        int right = min(root.rightChild);
+        return Math.min(Math.min(left, right), root.value);
+    }
+
     public static void main(String[] args) {
         Tree tree = new Tree();
         tree.add(7);
@@ -119,8 +145,10 @@ public class Tree {
         tree.traverseInOrder();
         tree.traversePostOrder();
 
-        System.out.println(tree.height());
-        
+        System.out.println("Height: " + tree.height());
+
+        System.out.println("Min: " + tree.min());
+
         System.out.println("Finished");
     }
 }
