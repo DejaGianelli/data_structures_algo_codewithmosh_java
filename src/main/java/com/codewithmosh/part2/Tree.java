@@ -13,6 +13,27 @@ public class Tree {
 
     private Node root;
 
+    public boolean find(int value) {
+        Node current = root;
+
+        while (true) {
+            if (current.value == value)
+                return true;
+
+            if (value < current.value) {
+                if (current.leftChild == null) {
+                    return false;
+                }
+                current = current.leftChild;
+            } else {
+                if (current.rightChild == null) {
+                    return false;
+                }
+                current = current.rightChild;
+            }
+        }
+    }
+
     public void add(int value) {
         if (root == null) {
             root = new Node(value);
@@ -46,6 +67,12 @@ public class Tree {
         tree.add(6);
         tree.add(8);
         tree.add(10);
+
+        System.out.println(tree.find(100));
+        System.out.println(tree.find(7));
+        System.out.println(tree.find(1));
+        System.out.println(tree.find(10));
+
         System.out.println("Finished");
     }
 }
