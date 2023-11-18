@@ -15,23 +15,16 @@ public class Tree {
 
     public boolean find(int value) {
         Node current = root;
-
-        while (true) {
-            if (current.value == value)
-                return true;
-
+        while (current != null) {
             if (value < current.value) {
-                if (current.leftChild == null) {
-                    return false;
-                }
                 current = current.leftChild;
-            } else {
-                if (current.rightChild == null) {
-                    return false;
-                }
+            } else if (value > current.value) {
                 current = current.rightChild;
+            } else {
+                return true;
             }
         }
+        return false;
     }
 
     public void add(int value) {
