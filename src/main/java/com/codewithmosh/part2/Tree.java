@@ -13,6 +13,42 @@ public class Tree {
 
     private Node root;
 
+    public void traverseInOrder() {
+        traverseInOrder(root);
+    }
+
+    public void traverseInOrder(Node root) {
+        if (root == null)
+            return;
+        traverseInOrder(root.leftChild);
+        System.out.println(root.value);
+        traverseInOrder(root.rightChild);
+    }
+
+    public void traversePreOrder() {
+        traversePreOrder(root);
+    }
+
+    public void traversePreOrder(Node root) {
+        if (root == null)
+            return;
+        System.out.println(root.value);
+        traversePreOrder(root.leftChild);
+        traversePreOrder(root.rightChild);
+    }
+
+    public void traversePostOrder() {
+        traversePostOrder(root);
+    }
+
+    public void traversePostOrder(Node root) {
+        if (root == null)
+            return;
+        traversePostOrder(root.leftChild);
+        traversePostOrder(root.rightChild);
+        System.out.println(root.value);
+    }
+
     public boolean find(int value) {
         Node current = root;
         while (current != null) {
@@ -65,6 +101,10 @@ public class Tree {
         System.out.println(tree.find(7));
         System.out.println(tree.find(1));
         System.out.println(tree.find(10));
+
+        tree.traversePreOrder();
+        tree.traverseInOrder();
+        tree.traversePostOrder();
 
         System.out.println("Finished");
     }
