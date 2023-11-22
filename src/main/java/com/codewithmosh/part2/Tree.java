@@ -16,6 +16,14 @@ public class Tree {
 
     private Node root;
 
+    public void traverseLevelOrder() {
+        for (var i = 0; i <= height(); i++) {
+            var list = getNodesAtDistance(i);
+            for (var value : list) {
+                System.out.println(value);
+            }
+        }
+    }
 
     public List<Integer> getNodesAtDistance(int distance) {
         List<Integer> list = new ArrayList<>();
@@ -192,6 +200,8 @@ public class Tree {
         for (Integer value : list) {
             System.out.println(value);
         }
+
+        tree.traverseLevelOrder();
 
         System.out.println("Finished");
     }
