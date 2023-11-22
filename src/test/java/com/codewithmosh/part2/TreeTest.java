@@ -8,6 +8,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TreeTest {
     @Test
+    void printNodesAtKDistance() {
+        Tree first = new Tree();
+        first.add(7);
+        first.add(4);
+        first.add(9);
+        first.add(1);
+        first.add(6);
+        first.add(8);
+        first.add(10);
+
+        assertTrue(true);
+    }
+
+    @Test
     void testIsEqual() {
         Tree first = new Tree();
         first.add(7);

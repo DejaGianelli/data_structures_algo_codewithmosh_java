@@ -1,5 +1,8 @@
 package com.codewithmosh.part2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tree {
     public static class Node {
         public int value;
@@ -12,6 +15,25 @@ public class Tree {
     }
 
     private Node root;
+
+
+    public List<Integer> getNodesAtDistance(int distance) {
+        List<Integer> list = new ArrayList<>();
+        getNodesAtDistance(root, distance, list);
+        return list;
+    }
+
+    private void getNodesAtDistance(Node root, int distance, List<Integer> list) {
+        if (root == null)
+            return;
+
+        if (distance == 0) {
+            list.add(root.value);
+            return;
+        }
+        getNodesAtDistance(root.leftChild, distance - 1, list);
+        getNodesAtDistance(root.rightChild, distance - 1, list);
+    }
 
     public boolean equals(Tree other) {
         if (other == null)
@@ -165,6 +187,11 @@ public class Tree {
         System.out.println("Height: " + tree.height());
 
         System.out.println("Min: " + tree.min());
+
+        List<Integer> list = tree.getNodesAtDistance(2);
+        for (Integer value : list) {
+            System.out.println(value);
+        }
 
         System.out.println("Finished");
     }
