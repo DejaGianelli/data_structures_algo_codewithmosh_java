@@ -14,27 +14,19 @@ public class AVLTree {
     private AVLNode root;
 
     public void insert(int value) {
-        if (root == null) {
-            root = new AVLNode(value);
-            return;
-        }
-        insert(root, value);
+        root = insert(root, value);
     }
 
-    public void insert(AVLNode node, int value) {
-        if (value < node.value) {
-            if (node.leftChild == null) {
-                node.leftChild = new AVLNode(value);
-                return;
-            }
-            insert(node.leftChild, value);
-        } else {
-            if (node.rightChild == null) {
-                node.rightChild = new AVLNode(value);
-                return;
-            }
-            insert(node.rightChild, value);
+    private AVLNode insert(AVLNode root, int value) {
+        if (root == null) {
+            return new AVLNode(value);
         }
+        if (value < root.value) {
+            root.leftChild = insert(root.leftChild, value);
+        } else {
+            root.rightChild = insert(root.rightChild, value);
+        }
+        return root;
     }
 
     public static void main(String[] args) {
