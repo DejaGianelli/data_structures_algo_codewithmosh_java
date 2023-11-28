@@ -22,17 +22,34 @@ public class AVLTree {
         if (root == null) {
             return new AVLNode(value);
         }
-        
+
         if (value < root.value) {
             root.leftChild = insert(root.leftChild, value);
         } else {
             root.rightChild = insert(root.rightChild, value);
         }
 
-        root.height = Math.max(height(root.leftChild),
-                height(root.leftChild)) + 1;
+        root.height = balanceFactor(root);
+
+        if (isLeftHeavy(root))
+            System.out.println(root.value + " is left heavy");
+
+        if (isRightHeavy(root))
+            System.out.println(root.value + "is right heavy");
 
         return root;
+    }
+
+    private boolean isRightHeavy(AVLNode node) {
+        return balanceFactor(node) < -1;
+    }
+
+    private boolean isLeftHeavy(AVLNode node) {
+        return balanceFactor(node) > 1;
+    }
+
+    private int balanceFactor(AVLNode node) {
+        return (node == null) ? 0 : height(node.leftChild) - height(node.rightChild);
     }
 
     private int height(AVLNode node) {
@@ -48,6 +65,11 @@ public class AVLTree {
         tree.insert(3);
         tree.insert(1);
         tree.insert(4);
+
+        AVLTree tree2 = new AVLTree();
+        tree2.insert(30);
+        tree2.insert(20);
+        tree2.insert(10);
 
         System.out.println("Finished");
     }
