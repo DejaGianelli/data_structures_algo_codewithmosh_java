@@ -12,6 +12,50 @@ public class Heap {
         bubbleUp();
     }
 
+    public void remove() {
+        if (isEmpty()) {
+            throw new IllegalStateException();
+        }
+        items[0] = items[--size];
+        int index = 0;
+        while (index <= size && !isValidParent(index)) {
+            int largerChildIndex = largerChildIndex(index);
+            swap(index, largerChildIndex);
+            index = largerChildIndex;
+        }
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    private int largerChildIndex(int index) {
+        return (leftChild(index) > rightChild(index)) ?
+                leftChildIndex(index) :
+                rightChildIndex(index);
+    }
+
+    private boolean isValidParent(int index) {
+        return items[index] >= leftChild(index) &&
+                items[index] >= rightChild(index);
+    }
+
+    private int rightChild(int index) {
+        return items[rightChildIndex(index)];
+    }
+
+    private int leftChild(int index) {
+        return items[leftChildIndex(index)];
+    }
+
+    private int rightChildIndex(int index) {
+        return index * 2 + 2;
+    }
+
+    private int leftChildIndex(int index) {
+        return index * 2 + 1;
+    }
+
     public void bubbleUp() {
         int index = size - 1;
         while (index > 0 && items[index] > items[parent(index)]) {
@@ -41,6 +85,8 @@ public class Heap {
         heap.insert(17);
         heap.insert(4);
         heap.insert(22);
+        heap.remove();
+        heap.remove();
         System.out.println("Done");
     }
 }
